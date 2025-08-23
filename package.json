@@ -1,0 +1,24 @@
+{
+  "name": "aio-auth-nosql",
+  "version": "1.0.0",
+  "description": "",
+  "homepage": "https://github.com/sanket-singh-sameer/aio-auth-nosql#readme",
+  "bugs": {
+    "url": "https://github.com/sanket-singh-sameer/aio-auth-nosql/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sanket-singh-sameer/aio-auth-nosql.git"
+  },
+  "license": "Apache-2.0",
+  "author": "impuresam",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "mongoose": "^8.18.0"
+  }
+}
