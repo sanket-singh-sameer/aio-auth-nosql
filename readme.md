@@ -18,16 +18,24 @@ npm install aio-auth-nosql
 ## Usage
 
 ```js
-const { Auth } = require('aio-auth-nosql');
+import { connectMongoDB, loginUser, registerUser } from "aio-auth-nosql";
 
-// Initialize with your NoSQL database config
-const auth = new Auth({ db: 'mongodb', uri: 'mongodb://localhost:27017/mydb' });
+// First, connect to your MongoDB database
+connectMongoDB(
+  "mongodb+srv://test:3GSnwEgmZQY4TtsY@cluster0.dsf1qex.mongodb.net/test"
+);
 
-// Register a user
-await auth.register('username', 'password');
+// Register a new user
+const signup = await registerUser({
+  email: "testuser1@example.com",
+  password: "testpassword",
+});
 
-// Authenticate a user
-const token = await auth.login('username', 'password');
+// Login an existing user
+const login = await loginUser({
+  email: "testuser1@example.com",
+  password: "testpassword",
+});
 ```
 
 ## Documentation
