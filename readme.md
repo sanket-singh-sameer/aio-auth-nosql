@@ -22,7 +22,7 @@ import { connectMongoDB, loginUser, registerUser } from "aio-auth-nosql";
 
 // First, connect to your MongoDB database
 connectMongoDB(
-  "mongodb+srv://test:3GSnwEgmZQY4TtsY@cluster0.dsf1qex.mongodb.net/test"
+  "mongodb://localhost:27017/your-database-name"
 );
 
 // Register a new user
