@@ -8,14 +8,13 @@ import {
   registerUserController,
 } from "./controllers/user.controller.js";
 
-
-export const registerUser = async (userData) => {
-  const response = await registerUserController(userData);
+export const registerUser = async (req, res, userData) => {
+  const response = await registerUserController(req, res, userData);
   return response;
 };
 
-export const loginUser = async (userData) => {
-  const response = await loginUserController(userData);
+export const loginUser = async (req, res, userData) => {
+  const response = await loginUserController(req, res, userData);
   return response;
 };
 
@@ -23,11 +22,9 @@ export const connectMongoDB = (uri) => {
   connectDB(uri);
 };
 
-
 export const setupJwtSecret = (secret) => {
   process.env.JWT_SECRET = secret || "default_jwt_secret";
 };
-
 
 export const setUpAIOAuthNoSQL = (app, mongoUri, secret) => {
   app.use(cookieParser());

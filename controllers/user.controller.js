@@ -2,23 +2,24 @@ import User from "../models/user.model.js";
 import bcrypt from "bcryptjs";
 import { signToken } from "../utils/jwtToken.js";
 
-export const registerUserController = async (userData) => {
+export const registerUserController = async (req, res, userData) => {
   try {
     if (!userData.password || !userData.email) {
-      return "Missing required fields";
+      return res.status(400).json({ message: "Missing required fields" });
     }
     userData.password = await bcrypt.hash(userData.password, 10);
     const user = new User(userData);
     await user.save();
 
     const token = signToken(user);
+    res.cookie("token", token, { httpOnly: true });
     return { user: { ...user._doc, password: undefined }, token };
   } catch (error) {
-    return "Error creating user";
+    return res.status(500).json({ message: "Error creating user" });
   }
 };
 
-export const loginUserController = async (userData) => {
+export const loginUserController = async (req, res, userData) => {
   try {
     const { email, password } = userData;
     const user = await User.findOne({ email });
@@ -30,8 +31,9 @@ export const loginUserController = async (userData) => {
       return "Invalid email or password";
     }
     const token = signToken(user);
+    res.cookie("token", token, { httpOnly: true });
     return { user: { ...user._doc, password: undefined }, token };
   } catch (error) {
-    return "Error logging in user";
+    return res.status(500).json({ message: "Error logging in user" });
   }
 };
